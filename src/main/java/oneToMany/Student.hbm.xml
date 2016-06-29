@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="oneToMany.Student" table="STUDENT">
+		<meta attribute="class-description">This class contains student details.</meta>
+		<id name="studentId" type="long" column="STUDENT_ID">
+			<generator class="native" />
+		</id>
+		<property name="studentName" type="string" not-null="true"
+			length="100" column="STUDENT_NAME" />
+			<set name="studentPhoneNumbers" table="STUDENT_PHONE" cascade="all">
+			<key column="STUDENT_ID" />
+			<many-to-many column="PHONE_ID" unique="true" class="oneToMany.Phone" />
+		</set>
+	</class>
+</hibernate-mapping>
+<!-- 
+We use many-to-many element to create the one-to-many relationship between the Student and Phone entities. 
+Since a student can have any number of phone numbers we use a collection to hold the values. In this case we use Set.
+Many-to-many element is usually used to create many-to-many relationship, 
+here we place the unique constraint on the PHONE_ID column, this makes the relationship one-to-many.
+ -->

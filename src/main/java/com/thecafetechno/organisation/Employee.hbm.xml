@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.thecafetechno.organisation.Employee" table="Employee">
+		<id name="employeeId" column="employee_id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="employeeName" column="employee_name"></property>
+
+		<!-- the line below maps contactNumbers Set to a table in hibernate, whose 
+			key column declares the foreign key that references the primary key of owning 
+			entity -->
+
+		<set name="contactNumbers" table="employee_contact_numbers">
+			<key column="employeeIdForTableMappedToSet" />
+			<!-- the element tag below declares datatype of collection elements -->
+			<element type="string" column="contact_number" not-null="true"></element>
+		</set>
+
+	</class>
+</hibernate-mapping>        

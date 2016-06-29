@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="oneToOne.Student" table="STUDENT">
+		<meta attribute="class-description">This class contains student details.</meta>
+		<id name="studentId" type="long" column="STUDENT_ID">
+			<generator class="native" />
+		</id>
+		<property name="studentName" type="string" not-null="true"
+			length="100" column="STUDENT_NAME" />
+		<many-to-one name="studentAddress" class="oneToOne.Address"
+			column="STUDENT_ADDRESS" not-null="true" cascade="all" unique="true" />
+	</class>
+</hibernate-mapping>
+<!-- 
+We use the many-to-one element to create the one-to-one relationship between the Student and Address entities.
+ We do this my making the STUDENT_ADDRESS column unique in the STUDENT table.
+  According to the relationship each student should have a unique address. 
+ -->
